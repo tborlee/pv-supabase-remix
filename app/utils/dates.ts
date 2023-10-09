@@ -6,5 +6,5 @@ export function formatDate(dateString: string, locale: string = 'fr-BE'): string
   }
 
   const date = new Date(parsed)
-  return date.toLocaleDateString(locale, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })
+  return date.toLocaleDateString(locale, {weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'})
 }

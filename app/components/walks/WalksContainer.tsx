@@ -6,6 +6,7 @@ import React from "react";
 import type {Tables, Views} from "~/database.types";
 import {formatDate} from "~/utils/dates";
 import {Link} from "@remix-run/react";
+import {useOutletContext} from "react-router";
 
 function findDateIndex(dates: any[] | null, currentDate: string) {
   if (!dates) return -1;
@@ -18,7 +19,9 @@ function findDateIndex(dates: any[] | null, currentDate: string) {
   return -1;
 }
 
-export default function WalksContainer({ walks, dates }: { walks: Tables<'walks'>[] | Views<'next_walks'>[] | null, dates: Views<'distinct_walk_dates'>[] | null  }) {
+export default function WalksContainer({walks}: { walks: Tables<'walks'>[] | Views<'next_walks'>[] | null }) {
+  const {dates} = useOutletContext<{ dates: Views<'distinct_walk_dates'>[] | null }>()
+
   if (walks === null || walks.length === 0) {
     return (
       <>
@@ -34,10 +37,11 @@ export default function WalksContainer({ walks, dates }: { walks: Tables<'walks'
 
   return (
     <>
-      <Header date={walks[0].date!} />
+      <Header date={walks[0].date!}/>
       <div className="d-flex justify-content-between my-2">
         <div>
-          {previousDate && <Link to={`/${previousDate}`} className="btn btn-outline-primary">{formatDate(previousDate)}</Link>}
+          {previousDate &&
+            <Link to={`/${previousDate}`} className="btn btn-outline-primary">{formatDate(previousDate)}</Link>}
         </div>
         <div>
           {nextDate && <Link to={`/${nextDate}`} className="btn btn-outline-primary">{formatDate(nextDate)}</Link>}

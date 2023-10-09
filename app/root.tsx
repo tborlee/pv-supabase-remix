@@ -12,9 +12,9 @@ import {
 
 import bootstrap from "bootstrap/dist/css/bootstrap.min.css";
 import app from "./app.css";
-import { json } from "@remix-run/node";
-import { createBrowserClient, createServerClient } from "@supabase/auth-helpers-remix";
-import type { Database } from "~/database.types";
+import {json} from "@remix-run/node";
+import {createBrowserClient, createServerClient} from "@supabase/auth-helpers-remix";
+import type {Database} from "~/database.types";
 import {useEffect, useState} from "react";
 import * as process from "process";
 
@@ -23,7 +23,7 @@ export const links: LinksFunction = () => [
   {rel: "stylesheet", href: app}
 ];
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = async ({request}: LoaderFunctionArgs) => {
   const env = {
     SUPABASE_URL: process.env.SUPABASE_URL!,
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY!,
@@ -40,24 +40,15 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     response,
   })
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
+  const {data: {session}} = await supabase.auth.getSession()
+  const {data: dates} = await supabase.from("distinct_walk_dates").select()
 
-  return json(
-    {
-      env,
-      session,
-    },
-    {
-      headers: response.headers,
-    }
-  )
+  return json({env, session, dates}, {headers: response.headers})
 }
 
 export default function Root() {
-  const { env, session } = useLoaderData<typeof loader>()
-  const { revalidate } = useRevalidator()
+  const {env, session, dates} = useLoaderData<typeof loader>()
+  const {revalidate} = useRevalidator()
 
   const [supabase] = useState(() =>
     createBrowserClient<Database>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY)
@@ -67,7 +58,7 @@ export default function Root() {
 
   useEffect(() => {
     const {
-      data: { subscription },
+      data: {subscription},
     } = supabase.auth.onAuthStateChange((event, session) => {
       if (event !== 'INITIAL_SESSION' && session?.access_token !== serverAccessToken) {
         // server and client are out of sync.
@@ -79,7 +70,7 @@ export default function Root() {
       subscription.unsubscribe()
     }
   }, [serverAccessToken, supabase, revalidate])
-  
+
   return (
     <html lang="en">
     <head>
@@ -90,7 +81,7 @@ export default function Root() {
     </head>
     <body>
     <main className="container">
-      <Outlet context={{ supabase, session, env }} />
+      <Outlet context={{supabase, session, env, dates}}/>
       <ScrollRestoration/>
       <Scripts/>
       <LiveReload/>

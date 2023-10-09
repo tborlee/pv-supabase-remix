@@ -6,8 +6,8 @@ import {faGoogle} from "@fortawesome/free-brands-svg-icons/faGoogle";
 import {useOutletContext} from "react-router";
 
 export default function UserHeader() {
-  const { supabase, session, env } = useOutletContext<{ supabase: SupabaseClient<Database>, session: Session, env: {[key: string]: string} }>()
-  
+  const {supabase, session, env} = useOutletContext<{ supabase: SupabaseClient<Database>, session: Session, env: { [key: string]: string } }>()
+
   const handleLogout = async () => {
     await supabase.auth.signOut()
   }
@@ -33,7 +33,7 @@ export default function UserHeader() {
   } else {
     return (
       <button className="btn btn-sm btn-outline-primary me-2" onClick={handleLogin}>
-        <FontAwesomeIcon icon={faGoogle} />
+        <FontAwesomeIcon icon={faGoogle}/>
         &nbsp;
         Login
       </button>

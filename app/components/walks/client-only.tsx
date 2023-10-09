@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
-import { useState, useEffect } from "react";
+import type {ReactNode} from "react";
+import {useState, useEffect} from "react";
 
 type Props = {
   children(): ReactNode;
@@ -8,7 +8,7 @@ type Props = {
 
 let hydrating = true;
 
-export function ClientOnly({ children, fallback = null }: Props) {
+export function ClientOnly({children, fallback = null}: Props) {
   const [hydrated, setHydrated] = useState(() => !hydrating);
 
   useEffect(function hydrate() {

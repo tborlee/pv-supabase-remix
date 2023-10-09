@@ -26,16 +26,15 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
     {request, response}
   )
 
-  const { data: walks } = await supabaseClient.from("next_walks").select();
-  const { data: dates } = await supabaseClient.from('distinct_walk_dates').select('date')
+  const {data: walks} = await supabaseClient.from("next_walks").select();
 
-  return json({ walks, dates }, {
+  return json({walks}, {
     headers: response.headers,
   })
 }
 
 export default function Index() {
-  const { walks, dates } = useLoaderData<typeof loader>()
-  
-  return <WalksContainer walks={walks} dates={dates} />
+  const {walks} = useLoaderData<typeof loader>()
+
+  return <WalksContainer walks={walks}/>
 }
