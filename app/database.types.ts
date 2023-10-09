@@ -157,36 +157,36 @@ export interface Database {
       }
       next_walks: {
         Row: {
-          activity: Database["public"]["Enums"]["walk_activity"] | null
-          adep_sante: boolean | null
-          be_wapp: boolean | null
-          bike: boolean | null
-          contact_first_name: string | null
-          contact_last_name: string | null
+          activity: Database["public"]["Enums"]["walk_activity"]
+          adep_sante: boolean
+          be_wapp: boolean
+          bike: boolean
+          contact_first_name: string
+          contact_last_name: string
           contact_phone_number: string | null
-          created_at: string | null
-          date: string | null
-          entity: string | null
-          extra_orientation: boolean | null
-          extra_walk: boolean | null
-          fifteen_km: boolean | null
-          guided: boolean | null
-          id: number | null
+          created_at: string
+          date: string
+          entity: string
+          extra_orientation: boolean
+          extra_walk: boolean
+          fifteen_km: boolean
+          guided: boolean
+          id: number
           ign: string | null
-          latitude: number | null
-          locality: string | null
-          longitude: number | null
-          meeting_point: string | null
+          latitude: number
+          locality: string
+          longitude: number
+          meeting_point: string
           meeting_point_info: string | null
-          mountain_bike: boolean | null
-          organizer: string | null
-          province: string | null
-          status: Database["public"]["Enums"]["walk_status"] | null
-          stroller: boolean | null
+          mountain_bike: boolean
+          organizer: string
+          province: string
+          status: Database["public"]["Enums"]["walk_status"]
+          stroller: boolean
           transport: string | null
-          updated_at: string | null
-          water_supply: boolean | null
-          wheelchair: boolean | null
+          updated_at: string
+          water_supply: boolean
+          wheelchair: boolean
         }
         Insert: {
           activity?: Database["public"]["Enums"]["walk_activity"] | null
@@ -272,6 +272,7 @@ export interface Database {
 }
 
 export type Tables<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Row']
+export type Views<T extends keyof Database['public']['Views']> = Database['public']['Views'][T]['Row']
 export type Enums<T extends keyof Database['public']['Enums']> = Database['public']['Enums'][T]
 
 export type DbResult<T> = T extends PromiseLike<infer U> ? U : never

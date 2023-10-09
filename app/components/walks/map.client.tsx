@@ -2,10 +2,10 @@ import L from "leaflet";
 import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
 import "leaflet/dist/images/marker-icon-2x.png";
 import React from "react";
-import type {Tables} from "~/database.types";
+import type {Tables, Views} from "~/database.types";
 
 interface MapProps {
-  walks: Tables<'walks'>[];
+  walks: Tables<'walks'>[] | Views<'next_walks'>[];
 }
 
 const myIcon = L.icon({

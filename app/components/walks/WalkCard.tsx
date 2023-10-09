@@ -13,9 +13,9 @@ import {faTrain} from "@fortawesome/free-solid-svg-icons/faTrain";
 import {faDumbbell} from "@fortawesome/free-solid-svg-icons";
 import WalkThumbnail from "./WalkThumbnail";
 import type {IconProp} from "@fortawesome/fontawesome-svg-core";
-import type {Tables} from "~/database.types";
+import type {Tables, Views} from "~/database.types";
 
-export default function WalkCard({walk, onDelete}: { walk: Tables<'walks'>, onDelete?: () => void }) {
+export default function WalkCard({walk}: { walk: Tables<'walks'> | Views<'next_walks'>, onDelete?: () => void }) {
   return (
     <div
       id={`walk-${walk.id}`}
@@ -156,7 +156,7 @@ const WalkInfo = ({info, icon, description}: { info: boolean, icon: IconProp, de
   }
 };
 
-const WalkBadge = ({walk}: { walk: Tables<'walks'> }) => {
+const WalkBadge = ({walk}: { walk: Tables<'walks'> | Views<'next_walks'> }) => {
   if (walk.status === "ok") {
     return (
       <span
