@@ -12,7 +12,6 @@ import {
 
 import bootstrap from "bootstrap/dist/css/bootstrap.min.css";
 import app from "./app.css";
-import Header from "~/components/Header";
 import { json } from "@remix-run/node";
 import { createBrowserClient, createServerClient } from "@supabase/auth-helpers-remix";
 import type { Database } from "~/database.types";
@@ -28,6 +27,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const env = {
     SUPABASE_URL: process.env.SUPABASE_URL!,
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY!,
+    AUTH_REDIRECT_URL: process.env.AUTH_REDIRECT_URL!,
   }
 
   const response = new Response()
