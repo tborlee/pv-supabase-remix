@@ -1,10 +1,7 @@
 import {Link} from "@remix-run/react";
 import UserHeader from "~/components/UserHeader";
-import type {Session} from "@supabase/gotrue-js";
-import type {SupabaseClient} from "@supabase/supabase-js";
-import type {Database} from "~/database.types";
 
-export default function Header({ supabase, session }: { supabase: SupabaseClient<Database>, session: Session }) {
+export default function Header() {
   return (
     <header
       className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-4 border-bottom">
@@ -15,7 +12,7 @@ export default function Header({ supabase, session }: { supabase: SupabaseClient
 
       <div className="col-md-5 text-end">
         <div className="d-flex gap-3 align-items-center justify-content-end">
-          <UserHeader supabase={supabase} session={session} />
+          <UserHeader />
         </div>
       </div>
     </header>

@@ -1,6 +1,6 @@
 import { redirect } from '@remix-run/node'
 import type { LoaderFunctionArgs } from '@remix-run/node'
-import type { Database } from '../database.types'
+import type { Database } from '~/database.types'
 import { createServerClient } from '@supabase/auth-helpers-remix'
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {

@@ -17,6 +17,7 @@ import { json } from "@remix-run/node";
 import { createBrowserClient, createServerClient } from "@supabase/auth-helpers-remix";
 import type { Database } from "~/database.types";
 import {useEffect, useState} from "react";
+import * as process from "process";
 
 export const links: LinksFunction = () => [
   {rel: "stylesheet", href: bootstrap},
@@ -86,7 +87,7 @@ export default function Root() {
     </head>
     <body>
     <main className="container">
-      <Outlet context={{ supabase, session }} />
+      <Outlet context={{ supabase, session, env }} />
       <ScrollRestoration/>
       <Scripts/>
       <LiveReload/>

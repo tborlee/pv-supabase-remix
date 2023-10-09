@@ -10,9 +10,6 @@ import leaflet from "leaflet/dist/leaflet.css";
 import {createServerClient} from "@supabase/auth-helpers-remix";
 import Header from "~/components/Header";
 import type {Database, DbResult} from "~/database.types";
-import {useOutletContext} from "react-router";
-import type {SupabaseClient} from "@supabase/supabase-js";
-import type {Session} from "@supabase/gotrue-js";
 
 export const links: LinksFunction = () => [
   {rel: "stylesheet", href: leaflet}
@@ -41,7 +38,6 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
 }
 
 export default function Index() {
-  const { supabase, session } = useOutletContext<{ supabase: SupabaseClient<Database>, session: Session }>()
   const { walks } = useLoaderData<typeof loader>()
 
   if (!walks) {
@@ -50,7 +46,7 @@ export default function Index() {
 
   return (
     <>
-      <Header supabase={supabase} session={session}/>
+      <Header />
       <ClientOnly
         fallback={
           <div className="d-flex justify-content-center align-items-center leaflet-container">
