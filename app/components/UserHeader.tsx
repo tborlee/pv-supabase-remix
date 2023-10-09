@@ -6,7 +6,7 @@ import {faGoogle} from "@fortawesome/free-brands-svg-icons/faGoogle";
 import {useOutletContext} from "react-router";
 
 export default function UserHeader() {
-  const { supabase, session, env } = useOutletContext<{ supabase: SupabaseClient<Database>, session: Session, env: any }>()
+  const { supabase, session, env } = useOutletContext<{ supabase: SupabaseClient<Database>, session: Session, env: {[key: string]: string} }>()
   
   const handleLogout = async () => {
     await supabase.auth.signOut()

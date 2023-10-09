@@ -28,6 +28,9 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     SUPABASE_URL: process.env.SUPABASE_URL!,
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY!,
     AUTH_REDIRECT_URL: process.env.AUTH_REDIRECT_URL!,
+    MAPBOX_TOKEN: process.env.MAPBOX_TOKEN!,
+    MAPBOX_USERNAME: process.env.MAPBOX_USERNAME!,
+    MAPBOX_STYLE: process.env.MAPBOX_STYLE!,
   }
 
   const response = new Response()

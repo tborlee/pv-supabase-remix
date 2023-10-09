@@ -1,13 +1,10 @@
 import React from "react";
-import * as process from "process";
 import type {Tables} from "~/database.types";
-
-const mapboxAccessToken = process? process.env.MAPBOX_TOKEN : "";
-const mapboxUsername = process ? process.env.MAPBOX_USERNAME : ""
-const mapStyle: string | undefined = process ? process.env.MAPBOX_STYLE : "";
-const res = "";
+import {useOutletContext} from "react-router";
 
 const WalkThumbnail = ({walk}: { walk: Tables<'walks'> }) => {
+  const { env } = useOutletContext<{ env: {[key: string]: string} }>()
+  
   const position = `${walk.longitude},${walk.latitude}`;
   return (
     <img
@@ -16,7 +13,7 @@ const WalkThumbnail = ({walk}: { walk: Tables<'walks'> }) => {
       width={150}
       height={150}
       aria-hidden={true}
-      src={`https://api.mapbox.com/styles/v1/${mapboxUsername}/${mapStyle}/static/pin-s(${position})/${position},6,0,0/150x150${res}?access_token=${mapboxAccessToken}`}
+      src={`https://api.mapbox.com/styles/v1/${env.MAPBOX_USERNAME}/${env.MAPBOX_STYLE}/static/pin-s(${position})/${position},6,0,0/150x150?access_token=${env.MAPBOX_TOKEN}`}
       alt={`Carte de ${walk.locality}`}
       title={`Carte de ${walk.locality}`}
     />
