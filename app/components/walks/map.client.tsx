@@ -1,11 +1,11 @@
 import L from "leaflet";
-import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/images/marker-icon-2x.png";
 import React from "react";
-import type {Tables, Views} from "~/database.types";
+import type { Tables, Views } from "~/database.types";
 
 interface MapProps {
-  walks: Tables<'walks'>[] | Views<'next_walks'>[];
+  walks: Tables<"walks">[] | Views<"next_walks">[];
 }
 
 const myIcon = L.icon({
@@ -14,11 +14,11 @@ const myIcon = L.icon({
   iconAnchor: [16, 32],
 });
 
-export function Map({walks}: MapProps) {
+export function Map({ walks }: MapProps) {
   return (
     <MapContainer
       className="is-hidden-mobile"
-      center={{lat: 50.3155646, lng: 5.009682}}
+      center={{ lat: 50.3155646, lng: 5.009682 }}
       zoom={8}
     >
       <TileLayer
@@ -38,7 +38,7 @@ export function Map({walks}: MapProps) {
           >
             <Popup>
               {walk.locality} ({walk.entity})
-              <br/>
+              <br />
               <a href={`#walk-${walk.id}`}>Détails</a>{" "}
             </Popup>
           </Marker>

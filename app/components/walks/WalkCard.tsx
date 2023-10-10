@@ -1,34 +1,33 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import {faWalking} from "@fortawesome/free-solid-svg-icons/faWalking";
-import {faCompass} from "@fortawesome/free-solid-svg-icons/faCompass";
-import {faMapMarker} from "@fortawesome/free-solid-svg-icons/faMapMarker";
-import {faWheelchair} from "@fortawesome/free-solid-svg-icons/faWheelchair";
-import {faBabyCarriage} from "@fortawesome/free-solid-svg-icons/faBabyCarriage";
-import {faBinoculars} from "@fortawesome/free-solid-svg-icons/faBinoculars";
-import {faBiking} from "@fortawesome/free-solid-svg-icons/faBiking";
-import {faWater} from "@fortawesome/free-solid-svg-icons/faWater";
-import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
-import {faTrain} from "@fortawesome/free-solid-svg-icons/faTrain";
-import {faDumbbell} from "@fortawesome/free-solid-svg-icons";
+import { faWalking } from "@fortawesome/free-solid-svg-icons/faWalking";
+import { faCompass } from "@fortawesome/free-solid-svg-icons/faCompass";
+import { faMapMarker } from "@fortawesome/free-solid-svg-icons/faMapMarker";
+import { faWheelchair } from "@fortawesome/free-solid-svg-icons/faWheelchair";
+import { faBabyCarriage } from "@fortawesome/free-solid-svg-icons/faBabyCarriage";
+import { faBinoculars } from "@fortawesome/free-solid-svg-icons/faBinoculars";
+import { faBiking } from "@fortawesome/free-solid-svg-icons/faBiking";
+import { faWater } from "@fortawesome/free-solid-svg-icons/faWater";
+import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
+import { faTrain } from "@fortawesome/free-solid-svg-icons/faTrain";
+import { faDumbbell } from "@fortawesome/free-solid-svg-icons";
 import WalkThumbnail from "./WalkThumbnail";
-import type {IconProp} from "@fortawesome/fontawesome-svg-core";
-import type {Tables, Views} from "~/database.types";
+import type { IconProp } from "@fortawesome/fontawesome-svg-core";
+import type { Tables, Views } from "~/database.types";
 
-export default function WalkCard({walk}: { walk: Tables<'walks'> | Views<'next_walks'>, onDelete?: () => void }) {
+export default function WalkCard({
+  walk,
+}: {
+  walk: Tables<"walks"> | Views<"next_walks">;
+  onDelete?: () => void;
+}) {
   return (
-    <div
-      id={`walk-${walk.id}`}
-      key={walk.id}
-      className="card mb-4 mt-4"
-    >
+    <div id={`walk-${walk.id}`} key={walk.id} className="card mb-4 mt-4">
       <div className="card-header">
         <div className="row">
           <div className="col-auto">
             <FontAwesomeIcon
-              icon={
-                walk.activity === "walk" ? faWalking : faCompass
-              }
+              icon={walk.activity === "walk" ? faWalking : faCompass}
               fixedWidth={true}
             />
           </div>
@@ -37,27 +36,26 @@ export default function WalkCard({walk}: { walk: Tables<'walks'> | Views<'next_w
             <span className="is-hidden-mobile">({walk.province})</span>
           </div>
           <div className="col-auto">
-            <WalkBadge walk={walk}/>
+            <WalkBadge walk={walk} />
           </div>
         </div>
       </div>
       <div className="card-body">
         <div className="row">
           <div className="col-auto has-text-centered">
-            <WalkThumbnail walk={walk}/>
+            <WalkThumbnail walk={walk} />
           </div>
           <div className="col row">
             <div className="col-12">
               <div className="row">
                 <div className="col-auto">
-                  <FontAwesomeIcon icon={faMapMarker} fixedWidth={true}/>
+                  <FontAwesomeIcon icon={faMapMarker} fixedWidth={true} />
                 </div>
                 <div className="col">
                   <a href={`geo:${walk.latitude},${walk.longitude}`}>
                     {walk.meeting_point}
                   </a>
-                  <span>
-              </span>
+                  <span></span>
                   {walk.meeting_point_info !== undefined && (
                     <span> - {walk.meeting_point_info}</span>
                   )}
@@ -123,7 +121,7 @@ export default function WalkCard({walk}: { walk: Tables<'walks'> | Views<'next_w
               <div className="col">
                 <div className="row is-mobile">
                   <div className="col-auto">
-                    <FontAwesomeIcon icon={faTrain} fixedWidth={true}/>
+                    <FontAwesomeIcon icon={faTrain} fixedWidth={true} />
                   </div>
                   <div className="col">{walk.transport}</div>
                 </div>
@@ -136,16 +134,24 @@ export default function WalkCard({walk}: { walk: Tables<'walks'> | Views<'next_w
         Organisé par <i>{walk.organizer}</i>
       </div>
     </div>
-  )
+  );
 }
 
-const WalkInfo = ({info, icon, description}: { info: boolean, icon: IconProp, description: string }) => {
+const WalkInfo = ({
+  info,
+  icon,
+  description,
+}: {
+  info: boolean;
+  icon: IconProp;
+  description: string;
+}) => {
   if (info) {
     return (
       <div className="col-6">
         <div className="row is-mobile">
           <div className="col-auto">
-            <FontAwesomeIcon icon={icon} fixedWidth={true}/>
+            <FontAwesomeIcon icon={icon} fixedWidth={true} />
           </div>
           <div className="col">{description}</div>
         </div>
@@ -156,7 +162,11 @@ const WalkInfo = ({info, icon, description}: { info: boolean, icon: IconProp, de
   }
 };
 
-const WalkBadge = ({walk}: { walk: Tables<'walks'> | Views<'next_walks'> }) => {
+const WalkBadge = ({
+  walk,
+}: {
+  walk: Tables<"walks"> | Views<"next_walks">;
+}) => {
   if (walk.status === "ok") {
     return (
       <span

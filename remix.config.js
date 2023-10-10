@@ -2,5 +2,5 @@
 module.exports = {
   ignoredRouteFiles: ["**/.*"],
   serverModuleFormat: "cjs",
-  browserNodeBuiltinsPolyfill: { modules: { process: true } }
+  browserNodeBuiltinsPolyfill: { modules: { process: true } },
 };

@@ -1,9 +1,13 @@
 import React from "react";
-import type {Tables, Views} from "~/database.types";
-import {useOutletContext} from "react-router";
+import type { Tables, Views } from "~/database.types";
+import { useOutletContext } from "react-router";
 
-const WalkThumbnail = ({walk}: { walk: Tables<'walks'> | Views<'next_walks'> }) => {
-  const {env} = useOutletContext<{ env: { [key: string]: string } }>()
+const WalkThumbnail = ({
+  walk,
+}: {
+  walk: Tables<"walks"> | Views<"next_walks">;
+}) => {
+  const { env } = useOutletContext<{ env: { [key: string]: string } }>();
 
   const position = `${walk.longitude},${walk.latitude}`;
   return (

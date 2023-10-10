@@ -15,7 +15,7 @@ export interface Walk {
   meeting_point: string;
   date: string;
   fifteen_km: boolean;
-  wheelchair: boolean,
+  wheelchair: boolean;
   stroller: boolean;
   extra_orientation: boolean;
   guided: boolean;
