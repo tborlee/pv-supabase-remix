@@ -8,8 +8,7 @@ import { useLoaderData } from "@remix-run/react";
 import React from "react";
 
 import leaflet from "leaflet/dist/leaflet.css";
-import { createServerClient } from "@supabase/auth-helpers-remix";
-import type { Database } from "~/database.types";
+import { createSupabaseClient } from "~/utils/supabase";
 import WalksContainer from "~/components/walks/WalksContainer";
 
 export const links: LinksFunction = () => [
@@ -21,19 +20,14 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const response = new Response();
-  const supabaseClient = createServerClient<Database>(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_ANON_KEY!,
-    { request, response },
-  );
+  const { supabase, headers } = createSupabaseClient(request);
 
-  const { data: walks } = await supabaseClient.from("next_walks").select();
+  const { data: walks } = await supabase.from("next_walks").select();
 
   return json(
     { walks },
     {
-      headers: response.headers,
+      headers,
     },
   );
 };

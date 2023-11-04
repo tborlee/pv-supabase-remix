@@ -4,8 +4,7 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import type { Database } from "~/database.types";
-import { createServerClient } from "@supabase/auth-helpers-remix";
+import { createSupabaseClient } from "~/utils/supabase";
 import { useLoaderData } from "@remix-run/react";
 import React from "react";
 import leaflet from "leaflet/dist/leaflet.css";
@@ -29,14 +28,9 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     });
   }
 
-  const response = new Response();
-  const supabaseClient = createServerClient<Database>(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_ANON_KEY!,
-    { request, response },
-  );
+  const { supabase, headers } = createSupabaseClient(request);
 
-  const { data: walks } = await supabaseClient
+  const { data: walks } = await supabase
     .from("walks")
     .select()
     .eq("date", params.date);
@@ -44,7 +38,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   return json(
     { walks },
     {
-      headers: response.headers,
+      headers,
     },
   );
 };

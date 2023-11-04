@@ -12,7 +12,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const form = await request.formData();
   const email = form.get("email");
   const password = form.get("password");
-  const headers = new Headers();
 
   if (!email || !password) {
     return json({ formError: "Email or password missing" }, { status: 400 });
@@ -29,7 +28,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     );
   }
 
-  const supabase = createSupabaseClient(request, headers);
+  const { supabase, headers } = createSupabaseClient(request);
   const result = await supabase.auth.signInWithPassword({ email, password });
 
   if (result.data.user) {

@@ -13,13 +13,11 @@ import {
 import bootstrap from "bootstrap/dist/css/bootstrap.min.css";
 import app from "./app.css";
 import { json } from "@remix-run/node";
-import {
-  createBrowserClient,
-  createServerClient,
-} from "@supabase/auth-helpers-remix";
+import { createSupabaseClient } from "~/utils/supabase";
 import type { Database } from "~/database.types";
 import { useEffect, useState } from "react";
 import * as process from "process";
+import { createBrowserClient } from "@supabase/ssr";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: bootstrap },
@@ -36,23 +34,14 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     MAPBOX_STYLE: process.env.MAPBOX_STYLE!,
   };
 
-  const response = new Response();
-
-  const supabase = createServerClient(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_ANON_KEY!,
-    {
-      request,
-      response,
-    },
-  );
+  const { supabase, headers } = createSupabaseClient(request);
 
   const {
     data: { session },
   } = await supabase.auth.getSession();
   const { data: dates } = await supabase.from("distinct_walk_dates").select();
 
-  return json({ env, session, dates }, { headers: response.headers });
+  return json({ env, session, dates }, { headers });
 };
 
 export default function Root() {
