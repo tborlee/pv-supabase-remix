@@ -20,9 +20,14 @@ export default function UserHeader() {
     );
   } else {
     return (
-      <Link to="/login" className="btn btn-sm btn-outline-primary me-2">
-        Login
-      </Link>
+      <div>
+        <Link to="/login" className="btn btn-sm btn-outline-primary me-2">
+          Login
+        </Link>
+        <Link to="/register" className="btn btn-sm btn-secondary me-2">
+          Register
+        </Link>
+      </div>
     );
   }
 }

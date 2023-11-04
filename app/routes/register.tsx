@@ -29,10 +29,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 
   const { supabase, headers } = createSupabaseClient(request);
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
+  const { error } = await supabase.auth.signUp({ email, password });
 
   if (!error) {
     return redirect("/", {
@@ -43,14 +40,14 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 };
 
-export default function Login() {
+export default function Register() {
   const actionData = useActionData<typeof action>();
   const { state } = useNavigation();
   const busy = state === "submitting";
 
   return (
     <Form className="form-signin" data-bitwarden-watching="1" method="post">
-      <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <h1 className="h3 mb-3 font-weight-normal">Registration</h1>
       <label htmlFor="inputEmail" className="sr-only">
         Email address
       </label>
@@ -79,7 +76,7 @@ export default function Login() {
         disabled={busy}
         type="submit"
       >
-        Sign in
+        Register
       </button>
       <span>{actionData?.formError}</span>
     </Form>
