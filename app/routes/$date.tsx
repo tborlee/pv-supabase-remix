@@ -4,14 +4,16 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import { createSupabaseClient } from "~/utils/supabase";
+import { createSupabaseClient } from "~/utils/supabase.server";
 import { useLoaderData } from "@remix-run/react";
 import React from "react";
 import leaflet from "leaflet/dist/leaflet.css";
+import map from "~/styles/map.css";
 import WalksContainer from "~/components/walks/WalksContainer";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: leaflet },
+  { rel: "stylesheet", href: map },
 ];
 
 export const meta: MetaFunction = () => {

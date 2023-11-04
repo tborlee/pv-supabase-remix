@@ -11,9 +11,8 @@ import {
 } from "@remix-run/react";
 
 import bootstrap from "bootstrap/dist/css/bootstrap.min.css";
-import app from "./app.css";
 import { json } from "@remix-run/node";
-import { createSupabaseClient } from "~/utils/supabase";
+import { createSupabaseClient } from "~/utils/supabase.server";
 import type { Database } from "~/database.types";
 import { useEffect, useState } from "react";
 import * as process from "process";
@@ -21,7 +20,6 @@ import { createBrowserClient } from "@supabase/ssr";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: bootstrap },
-  { rel: "stylesheet", href: app },
 ];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {

@@ -1,7 +1,7 @@
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 import type { ActionFunctionArgs, LinksFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { createSupabaseClient } from "~/utils/supabase";
+import { createSupabaseClient } from "~/utils/supabase.server";
 import stylesUrl from "~/styles/login.css";
 
 export const links: LinksFunction = () => [
