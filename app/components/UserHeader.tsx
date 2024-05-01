@@ -1,16 +1,16 @@
-import type { Session } from "@supabase/gotrue-js";
+import type { User } from "@supabase/auth-js";
 import { useOutletContext } from "react-router";
 import { Form, Link } from "@remix-run/react";
 
 export default function UserHeader() {
-  const { session } = useOutletContext<{
-    session: Session;
+  const { user } = useOutletContext<{
+    user: User;
   }>();
 
-  if (session && session.user) {
+  if (user) {
     return (
       <>
-        Hello {session.user.email}
+        Hello {user.email}
         <Form action="/logout" method="post">
           <button type="submit" className="btn btn-sm btn-light text-dark me-2">
             Logout

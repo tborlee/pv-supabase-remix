@@ -7,14 +7,13 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
-  useRevalidator,
 } from "@remix-run/react";
 
 import bootstrap from "bootstrap/dist/css/bootstrap.min.css";
 import { json } from "@remix-run/node";
 import { createSupabaseClient } from "~/utils/supabase.server";
 import type { Database } from "~/database.types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as process from "process";
 import { createBrowserClient } from "@supabase/ssr";
 
@@ -35,40 +34,19 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { supabase, headers } = createSupabaseClient(request);
 
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
   const { data: dates } = await supabase.from("distinct_walk_dates").select();
 
-  return json({ env, session, dates }, { headers });
+  return json({ env, user, dates }, { headers });
 };
 
 export default function Root() {
-  const { env, session, dates } = useLoaderData<typeof loader>();
-  const { revalidate } = useRevalidator();
+  const { env, user, dates } = useLoaderData<typeof loader>();
 
   const [supabase] = useState(() =>
     createBrowserClient<Database>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY),
   );
-
-  const serverAccessToken = session?.access_token;
-
-  useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      if (
-        event !== "INITIAL_SESSION" &&
-        session?.access_token !== serverAccessToken
-      ) {
-        // server and client are out of sync.
-        revalidate();
-      }
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [serverAccessToken, supabase, revalidate]);
 
   return (
     <html lang="en">
@@ -80,7 +58,7 @@ export default function Root() {
       </head>
       <body>
         <main className="container">
-          <Outlet context={{ supabase, session, env, dates }} />
+          <Outlet context={{ supabase, user, env, dates }} />
           <ScrollRestoration />
           <Scripts />
           <LiveReload />
