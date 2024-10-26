@@ -17,7 +17,7 @@ const myIcon = L.icon({
 export function Map({ walks }: MapProps) {
   return (
     <MapContainer
-      className="is-hidden-mobile"
+      className="d-md-none d-lg-block"
       center={{ lat: 50.3155646, lng: 5.009682 }}
       zoom={8}
     >

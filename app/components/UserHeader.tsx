@@ -9,22 +9,22 @@ export default function UserHeader() {
 
   if (user) {
     return (
-      <>
-        Hello {user.email}
+      <div className="d-flex">
+          <span>Hello {user.email}</span>
         <Form action="/logout" method="post">
-          <button type="submit" className="btn btn-sm btn-light text-dark me-2">
+          <button type="submit" className="btn btn-sm btn-outline-dark text-dark me-2 ms-2">
             Logout
           </button>
         </Form>
-      </>
+      </div>
     );
   } else {
     return (
-      <div>
-        <Link to="/login" className="btn btn-sm btn-outline-primary me-2">
+      <div className="d-flex">
+        <Link to="/login" className="btn btn-sm btn-outline-primary">
           Login
         </Link>
-        <Link to="/register" className="btn btn-sm btn-secondary me-2">
+        <Link to="/register" className="btn btn-sm btn-secondary">
           Register
         </Link>
       </div>

@@ -4,23 +4,32 @@ import { formatDate } from "~/utils/dates";
 
 export default function Header({ date }: { date?: string }) {
   return (
-    <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-2 mb-4 border-bottom">
-      <Link
-        to="/"
-        className="d-flex gap-3 align-items-center col-md-7 mb-2 mb-md-0 text-dark text-decoration-none"
-      >
-        <img src="/marker.png" alt="ADEPS logo" width="32" height="32" />
-        <span className="fs-4">
-          Marches ADEPS
-          {date && !isNaN(Date.parse(date)) ? ` du ${formatDate(date)}` : ""}
-        </span>
-      </Link>
-
-      <div className="col-md-5 text-end">
-        <div className="d-flex gap-3 align-items-center justify-content-end">
-          <UserHeader />
+    <navbar className="navbar navbar-expand-lg bg-body-tertiary">
+        <div className="container-fluid">
+            <Link to="/" className="navbar-brand" href="#">
+                {" "}
+                <img src="/marker.png" alt="ADEPS logo" width="32" height="32"/>
+                <span className="fs-4">
+            Marches ADEPS
+                    {date && !isNaN(Date.parse(date)) ? ` du ${formatDate(date)}` : ""}
+          </span>
+            </Link>
+            <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                <UserHeader/>
+            </div>
         </div>
-      </div>
-    </header>
+    </navbar>
   );
 }
