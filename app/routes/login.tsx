@@ -1,6 +1,11 @@
-import { Form, ShouldRevalidateFunction, useActionData, useNavigation } from "react-router";
+import {
+  Form,
+  ShouldRevalidateFunction,
+  useActionData,
+  useNavigation,
+} from "react-router";
 import type { ActionFunctionArgs, LinksFunction } from "react-router";
-import { data, redirect } from "react-router";
+import { redirect } from "react-router";
 import { createSupabaseClient } from "../utils/supabase.server";
 import stylesUrl from "../styles/login.css?url";
 
@@ -18,7 +23,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const password = form.get("password");
 
   if (!email || !password) {
-    return data({ formError: "Email or password missing" }, { status: 400 });
+    return { formError: "Email or password missing" };
   }
 
   if (typeof email !== "string" || typeof password !== "string") {
