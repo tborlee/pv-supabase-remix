@@ -1,12 +1,8 @@
-import type {
-  LinksFunction,
-  LoaderFunctionArgs,
-  MetaFunction,
-} from "@remix-run/node";
+import type { LinksFunction, LoaderFunctionArgs, MetaFunction } from "react-router";
 import { createSupabaseClient } from "../utils/supabase.server";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "react-router";
 import React from "react";
-import leaflet from "leaflet/dist/leaflet.css";
+import leaflet from "leaflet/dist/leaflet.css?url";
 import map from "../styles/map.css?url";
 import WalksContainer from "../components/walks/WalksContainer";
 

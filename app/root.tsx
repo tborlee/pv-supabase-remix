@@ -1,14 +1,7 @@
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLoaderData,
-} from "@remix-run/react";
+import type { LinksFunction, LoaderFunctionArgs } from "react-router";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "react-router";
 
-import bootstrap from "bootstrap/dist/css/bootstrap.min.css";
+import bootstrap from "bootstrap/dist/css/bootstrap.min.css?url";
 import { createSupabaseClient } from "./utils/supabase.server";
 import type { Database } from "./database.types";
 import { useState } from "react";

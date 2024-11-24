@@ -1,11 +1,6 @@
-import {
-  Form,
-  ShouldRevalidateFunction,
-  useActionData,
-  useNavigation,
-} from "@remix-run/react";
-import type { ActionFunctionArgs, LinksFunction } from "@remix-run/node";
-import { data, redirect } from "@remix-run/node";
+import { Form, ShouldRevalidateFunction, useActionData, useNavigation } from "react-router";
+import type { ActionFunctionArgs, LinksFunction } from "react-router";
+import { data, redirect } from "react-router";
 import { createSupabaseClient } from "../utils/supabase.server";
 import stylesUrl from "../styles/login.css?url";
 
@@ -40,8 +35,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     password,
   });
 
-  console.log(headers);
-
   if (!error) {
     return redirect("/", {
       headers,
@@ -56,7 +49,6 @@ export default function Login() {
   const { state } = useNavigation();
   const busy = state === "submitting";
 
-  console.log(actionData);
   return (
     <Form className="form-signin" data-bitwarden-watching="1" method="post">
       <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>

@@ -1,6 +1,6 @@
-import { Form, useActionData, useNavigation } from "@remix-run/react";
-import type { ActionFunctionArgs, LinksFunction } from "@remix-run/node";
-import { data, redirect } from "@remix-run/node";
+import { Form, useActionData, useNavigation } from "react-router";
+import type { ActionFunctionArgs, LinksFunction } from "react-router";
+import { data, redirect } from "react-router";
 import { createSupabaseClient } from "../utils/supabase.server";
 import stylesUrl from "../styles/login.css?url";
 

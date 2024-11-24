@@ -5,7 +5,7 @@ import WalkCard from "./WalkCard";
 import React from "react";
 import type { Tables, Views } from "../../database.types";
 import { formatDate } from "../../utils/dates";
-import { Link } from "@remix-run/react";
+import { Link } from "react-router";
 import { useOutletContext } from "react-router";
 
 function findDateIndex(dates: any[] | null, currentDate: string) {

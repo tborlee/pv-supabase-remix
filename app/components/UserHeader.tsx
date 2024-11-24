@@ -1,6 +1,6 @@
 import type { User } from "@supabase/auth-js";
 import { useOutletContext } from "react-router";
-import { Form, Link } from "@remix-run/react";
+import { Form, Link } from "react-router";
 
 export default function UserHeader() {
   const { user } = useOutletContext<{

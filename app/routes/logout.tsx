@@ -1,5 +1,5 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
+import type { ActionFunctionArgs } from "react-router";
+import { redirect } from "react-router";
 import { createSupabaseClient } from "../utils/supabase.server";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
