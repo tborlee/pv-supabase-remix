@@ -1,8 +1,8 @@
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 import type { ActionFunctionArgs, LinksFunction } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
-import { createSupabaseClient } from "~/utils/supabase.server";
-import stylesUrl from "~/styles/login.css";
+import { data, redirect } from "@remix-run/node";
+import { createSupabaseClient } from "../utils/supabase.server";
+import stylesUrl from "../styles/login.css?url";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesUrl },
@@ -14,11 +14,11 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const password = form.get("password");
 
   if (!email || !password) {
-    return json({ formError: "Email or password missing" }, { status: 400 });
+    return data({ formError: "Email or password missing" }, { status: 400 });
   }
 
   if (typeof email !== "string" || typeof password !== "string") {
-    return json(
+    return data(
       {
         fieldErrors: null,
         fields: null,
@@ -36,7 +36,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       headers,
     });
   } else {
-    return json({ formError: error?.message }, { status: 500 });
+    return data({ formError: error?.message }, { status: 500 });
   }
 };
 

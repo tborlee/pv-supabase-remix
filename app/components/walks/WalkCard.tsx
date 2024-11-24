@@ -13,7 +13,7 @@ import { faTrain } from "@fortawesome/free-solid-svg-icons/faTrain";
 import { faDumbbell } from "@fortawesome/free-solid-svg-icons";
 import WalkThumbnail from "./WalkThumbnail";
 import type { IconProp } from "@fortawesome/fontawesome-svg-core";
-import type { Tables, Views } from "~/database.types";
+import type { Tables, Views } from "./database.types";
 
 export default function WalkCard({
   walk,

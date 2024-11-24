@@ -1,7 +1,6 @@
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -10,9 +9,8 @@ import {
 } from "@remix-run/react";
 
 import bootstrap from "bootstrap/dist/css/bootstrap.min.css";
-import { json } from "@remix-run/node";
-import { createSupabaseClient } from "~/utils/supabase.server";
-import type { Database } from "~/database.types";
+import { createSupabaseClient } from "./utils/supabase.server";
+import type { Database } from "./database.types";
 import { useState } from "react";
 import * as process from "process";
 import { createBrowserClient } from "@supabase/ssr";
@@ -31,14 +29,14 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     MAPBOX_STYLE: process.env.MAPBOX_STYLE!,
   };
 
-  const { supabase, headers } = createSupabaseClient(request);
+  const { supabase } = createSupabaseClient(request);
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
   const { data: dates } = await supabase.from("distinct_walk_dates").select();
 
-  return json({ env, user, dates }, { headers });
+  return { env, user, dates };
 };
 
 export default function Root() {
@@ -61,7 +59,6 @@ export default function Root() {
           <Outlet context={{ supabase, user, env, dates }} />
           <ScrollRestoration />
           <Scripts />
-          <LiveReload />
         </main>
       </body>
     </html>

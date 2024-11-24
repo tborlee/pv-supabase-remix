@@ -1,5 +1,5 @@
 import React from "react";
-import type { Tables, Views } from "~/database.types";
+import type { Tables, Views } from "./database.types";
 import { useOutletContext } from "react-router";
 
 const WalkThumbnail = ({

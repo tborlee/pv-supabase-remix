@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
-import UserHeader from "~/components/UserHeader";
-import { formatDate } from "~/utils/dates";
+import UserHeader from "./UserHeader";
+import { formatDate } from "../utils/dates";
 
 export default function Header({ date }: { date?: string }) {
   return (

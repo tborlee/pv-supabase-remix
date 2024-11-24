@@ -1,15 +1,14 @@
-import { json } from "@remix-run/node";
 import type {
   LinksFunction,
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import { createSupabaseClient } from "~/utils/supabase.server";
+import { createSupabaseClient } from "../utils/supabase.server";
 import { useLoaderData } from "@remix-run/react";
 import React from "react";
 import leaflet from "leaflet/dist/leaflet.css";
-import map from "~/styles/map.css";
-import WalksContainer from "~/components/walks/WalksContainer";
+import map from "../styles/map.css?url";
+import WalksContainer from "../components/walks/WalksContainer";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: leaflet },
@@ -37,12 +36,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     .select()
     .eq("date", params.date);
 
-  return json(
-    { walks },
-    {
-      headers,
-    },
-  );
+  return { walks };
 };
 
 export default function WalkDate() {

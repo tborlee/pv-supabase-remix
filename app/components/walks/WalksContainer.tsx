@@ -1,10 +1,10 @@
-import Header from "~/components/Header";
-import { ClientOnly } from "~/components/walks/client-only";
-import { Map } from "~/components/walks/map.client";
-import WalkCard from "~/components/walks/WalkCard";
+import Header from "../Header";
+import { ClientOnly } from "./client-only";
+import { Map } from "./map.client";
+import WalkCard from "./WalkCard";
 import React from "react";
-import type { Tables, Views } from "~/database.types";
-import { formatDate } from "~/utils/dates";
+import type { Tables, Views } from "../../database.types";
+import { formatDate } from "../../utils/dates";
 import { Link } from "@remix-run/react";
 import { useOutletContext } from "react-router";
 
@@ -28,7 +28,7 @@ export default function WalksContainer({
     dates: Views<"distinct_walk_dates">[] | null;
   }>();
 
-  if (walks === null || walks.length === 0) {
+  if (!walks || walks.length === 0) {
     return (
       <>
         <Header />

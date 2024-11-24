@@ -8,9 +8,9 @@ import { useLoaderData } from "@remix-run/react";
 import React from "react";
 
 import leaflet from "leaflet/dist/leaflet.css";
-import map from "~/styles/map.css";
-import { createSupabaseClient } from "~/utils/supabase.server";
-import WalksContainer from "~/components/walks/WalksContainer";
+import map from "../styles/map.css?url";
+import { createSupabaseClient } from "../utils/supabase.server";
+import WalksContainer from "../components/walks/WalksContainer";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: leaflet },
@@ -26,12 +26,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
   const { data: walks } = await supabase.from("next_walks").select();
 
-  return json(
-    { walks },
-    {
-      headers,
-    },
-  );
+  return { walks };
 };
 
 export default function Index() {
